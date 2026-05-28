@@ -32,36 +32,16 @@ body {
 .serif { font-family: 'Cormorant Garamond', serif; }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-@keyframes slideRight {
-  from { width: 0; }
-  to { width: 100%; }
-}
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-@keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10% { transform: translate(-2%, -3%); }
-  20% { transform: translate(3%, 2%); }
-  30% { transform: translate(-1%, 4%); }
-  40% { transform: translate(2%, -1%); }
-  50% { transform: translate(-3%, 3%); }
-  60% { transform: translate(1%, -2%); }
-  70% { transform: translate(-2%, 1%); }
-  80% { transform: translate(3%, -3%); }
-  90% { transform: translate(-1%, 2%); }
 }
 
 .nav-link {
@@ -94,7 +74,7 @@ body {
   gap: 10px;
   background: ${theme.saffron};
   color: white;
-  padding: 14px 32px;
+  padding: 14px 28px;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
@@ -105,6 +85,7 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-primary::before {
   content: '';
@@ -124,7 +105,7 @@ body {
   gap: 10px;
   background: transparent;
   color: ${theme.saffron};
-  padding: 13px 31px;
+  padding: 13px 27px;
   font-family: 'DM Sans', sans-serif;
   font-size: 13px;
   font-weight: 500;
@@ -133,6 +114,7 @@ body {
   border: 1px solid ${theme.saffron};
   cursor: pointer;
   transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-outline:hover { background: ${theme.saffron}; color: white; }
 
@@ -152,19 +134,22 @@ body {
   display: block;
   width: 30px; height: 1px;
   background: ${theme.saffron};
+  flex-shrink: 0;
 }
 
 .card-hover {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
-.card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(61,43,31,0.15);
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(61,43,31,0.15);
+  }
 }
 
 input, textarea, select {
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   color: ${theme.earth};
   background: white;
   border: 1px solid #E0D5C8;
@@ -177,9 +162,97 @@ input, textarea, select {
 }
 input:focus, textarea:focus { border-color: ${theme.saffron}; }
 input::placeholder, textarea::placeholder { color: #B0A090; }
+
+/* ── RESPONSIVE UTILITIES ── */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+.grid-halves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.grid-contact {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 80px;
+  align-items: start;
+}
+.grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.grid-4col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.grid-program-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.grid-footer { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  min-width: 440px;
+  position: absolute;
+  bottom: -80px; right: 0;
+}
+.women-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 2px; }
+.impact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
+.partner-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; }
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.about-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.cta-banner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px; }
+.cta-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 960px) {
+  .grid-2col { grid-template-columns: 1fr; gap: 48px; }
+  .grid-2col > *:first-child { position: static !important; }
+  .grid-halves { grid-template-columns: 1fr; gap: 48px; }
+  .grid-contact { grid-template-columns: 1fr; gap: 48px; }
+  .grid-3col { grid-template-columns: 1fr; gap: 0; }
+  .grid-footer { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .stats-bar { position: static; min-width: unset; width: 100%; margin-top: 48px; grid-template-columns: repeat(3, 1fr); }
+  .women-card-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-program-row { grid-template-columns: auto 1fr; gap: 24px; }
+  .grid-program-row > *:last-child { grid-column: 1 / -1; }
+  .partner-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+  .impact-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+
+@media (max-width: 640px) {
+  .grid-footer { grid-template-columns: 1fr; gap: 32px; }
+  .women-card-grid { grid-template-columns: 1fr; gap: 12px; }
+  .stats-bar { grid-template-columns: 1fr; }
+  .stats-bar > * { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stats-bar > *:first-child { border-top: none; }
+  .about-detail-grid { grid-template-columns: 1fr; gap: 12px; }
+  .hero-btns { flex-direction: column; align-items: flex-start; }
+  .contact-form-grid { grid-template-columns: 1fr; }
+  .cta-banner { flex-direction: column; align-items: flex-start; }
+  .cta-btns { flex-direction: column; width: 100%; }
+  .cta-btns button { width: 100%; justify-content: center; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+  .hero-btns .btn-primary, .hero-btns .btn-outline { width: auto; }
+  .grid-program-row { grid-template-columns: 1fr; gap: 20px; }
+  .grid-program-row > *:first-child { display: none; }
+  .partner-grid { grid-template-columns: 1fr; }
+  .budget-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+
+@media (max-width: 480px) {
+  .budget-grid { grid-template-columns: 1fr 1fr; }
+}
 `;
 
-// ─── ICONS ────────────────────────────────────────────────
 const Icon = {
   Menu: () => (
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
@@ -238,7 +311,6 @@ const Icon = {
       <path d="M1 19H21" stroke="currentColor" strokeWidth="1.4"/>
       <path d="M3 19V10L8 6L13 10V19" stroke="currentColor" strokeWidth="1.4" fill="none"/>
       <path d="M14 19V12H19V19" stroke="currentColor" strokeWidth="1.4" fill="none"/>
-      <path d="M8 3C8 3 7 6 8 6C9 6 8 3 8 3Z" stroke="currentColor" strokeWidth="1.2"/>
     </svg>
   ),
   Women: () => (
@@ -254,7 +326,6 @@ const Icon = {
   ),
 };
 
-// ─── DECORATIVE MANDALA SVG ────────────────────────────────
 const MandalaSVG = ({ size = 300, opacity = 0.06 }) => (
   <svg width={size} height={size} viewBox="0 0 300 300" fill="none" style={{ opacity }}>
     <circle cx="150" cy="150" r="140" stroke={theme.saffron} strokeWidth="0.8"/>
@@ -280,14 +351,11 @@ const MandalaSVG = ({ size = 300, opacity = 0.06 }) => (
   </svg>
 );
 
-// ─── LOTUS DECORATION ─────────────────────────────────────
 const LotusSVG = ({ color = theme.saffron }) => (
   <svg width="60" height="40" viewBox="0 0 60 40" fill="none">
     <path d="M30 38 C30 38 10 30 10 15 C10 8 18 4 24 8 C26 9 28 11 30 14 C32 11 34 9 36 8 C42 4 50 8 50 15 C50 30 30 38 30 38Z" stroke={color} strokeWidth="1.2" fill="none"/>
     <path d="M30 38 C30 38 20 28 18 18 C16 10 20 5 24 7 C27 8 29 12 30 16 C31 12 33 8 36 7 C40 5 44 10 42 18 C40 28 30 38 30 38Z" stroke={color} strokeWidth="0.8" fill="none" opacity="0.5"/>
     <line x1="30" y1="38" x2="30" y2="2" stroke={color} strokeWidth="1" opacity="0.4"/>
-    <path d="M20 35 C20 35 15 25 15 20" stroke={color} strokeWidth="0.8" opacity="0.4"/>
-    <path d="M40 35 C40 35 45 25 45 20" stroke={color} strokeWidth="0.8" opacity="0.4"/>
   </svg>
 );
 
@@ -310,42 +378,43 @@ function Navbar({ page, setPage }) {
         .navbar {
           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
           transition: all 0.4s ease;
-          padding: ${scrolled ? "14px 0" : "22px 0"};
+          padding: ${scrolled ? "12px 0" : "18px 0"};
           background: ${scrolled ? "rgba(250,246,240,0.97)" : "transparent"};
           backdrop-filter: ${scrolled ? "blur(12px)" : "none"};
           border-bottom: ${scrolled ? `1px solid rgba(200,81,10,0.1)` : "none"};
         }
         .nav-inner {
           max-width: 1280px; margin: 0 auto;
-          padding: 0 40px;
+          padding: 0 24px;
           display: flex; align-items: center; justify-content: space-between;
         }
+        @media (min-width: 641px) { .nav-inner { padding: 0 40px; } }
         .logo-mark {
-          display: flex; align-items: center; gap: 14px; cursor: pointer;
+          display: flex; align-items: center; gap: 12px; cursor: pointer;
         }
         .logo-circle {
-          width: 44px; height: 44px; border-radius: 50%;
+          width: 40px; height: 40px; border-radius: 50%;
           background: ${theme.saffron};
           display: flex; align-items: center; justify-content: center;
-          font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700;
+          font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
           color: white; letter-spacing: -1px;
           flex-shrink: 0;
         }
         .logo-text { line-height: 1.2; }
         .logo-name {
-          font-family: 'Cinzel', serif; font-size: 15px; font-weight: 600;
+          font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
           color: ${theme.earth}; letter-spacing: 0.04em;
         }
         .logo-tagline {
-          font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+          font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
           color: ${theme.saffron}; font-weight: 400;
         }
         .nav-links {
-          display: flex; align-items: center; gap: 36px;
+          display: flex; align-items: center; gap: 32px;
         }
         .nav-cta {
           background: ${theme.saffron}; color: white;
-          padding: 10px 22px;
+          padding: 10px 20px;
           font-family: 'DM Sans', sans-serif; font-size: 12px;
           font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
           border: none; cursor: pointer;
@@ -354,32 +423,54 @@ function Navbar({ page, setPage }) {
         .nav-cta:hover { background: ${theme.terracotta}; }
         .hamburger {
           display: none; background: none; border: none;
-          color: ${theme.earth}; cursor: pointer; padding: 4px;
+          color: ${theme.earth}; cursor: pointer; padding: 8px;
+          -webkit-tap-highlight-color: transparent;
+          min-width: 44px; min-height: 44px;
+          align-items: center; justify-content: center;
         }
         @media (max-width: 900px) {
           .nav-links { display: none; }
-          .hamburger { display: block; }
+          .hamburger { display: flex; }
         }
         .mobile-menu {
           position: fixed; top: 0; left: 0; right: 0; bottom: 0;
           background: ${theme.cream}; z-index: 2000;
           display: flex; flex-direction: column;
-          padding: 30px 40px;
+          padding: 24px;
+          overflow-y: auto;
         }
         .mobile-menu-header {
           display: flex; justify-content: space-between; align-items: center;
-          margin-bottom: 60px;
+          margin-bottom: 48px;
+        }
+        .mobile-close-btn {
+          background: none; border: none; cursor: pointer;
+          color: ${theme.earth}; padding: 8px;
+          min-width: 44px; min-height: 44px;
+          display: flex; align-items: center; justify-content: center;
+          -webkit-tap-highlight-color: transparent;
         }
         .mobile-nav-links {
-          display: flex; flex-direction: column; gap: 4px;
+          display: flex; flex-direction: column; gap: 0;
         }
         .mobile-nav-link {
-          font-family: 'Cinzel', serif; font-size: 32px; font-weight: 400;
+          font-family: 'Cinzel', serif; font-size: clamp(24px, 8vw, 36px); font-weight: 400;
           color: ${theme.earth}; cursor: pointer;
-          padding: 14px 0; border-bottom: 1px solid rgba(61,43,31,0.1);
+          padding: 16px 0; border-bottom: 1px solid rgba(61,43,31,0.1);
           transition: color 0.2s; letter-spacing: 0.02em;
+          -webkit-tap-highlight-color: transparent;
+          min-height: 56px; display: flex; align-items: center;
         }
         .mobile-nav-link:hover, .mobile-nav-link.active { color: ${theme.saffron}; }
+        .mobile-donate {
+          margin-top: 32px;
+          background: ${theme.saffron}; color: white;
+          padding: 16px; text-align: center;
+          font-family: 'DM Sans', sans-serif; font-size: 13px;
+          font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+          border: none; cursor: pointer; width: 100%;
+          -webkit-tap-highlight-color: transparent;
+        }
       `}</style>
       <nav className="navbar">
         <div className="nav-inner">
@@ -396,7 +487,7 @@ function Navbar({ page, setPage }) {
             ))}
             <button className="nav-cta" onClick={() => setPage("Contact")}>Donate</button>
           </div>
-          <button className="hamburger" onClick={() => setMenuOpen(true)}><Icon.Menu /></button>
+          <button className="hamburger" onClick={() => setMenuOpen(true)} aria-label="Open menu"><Icon.Menu /></button>
         </div>
       </nav>
       {menuOpen && (
@@ -408,13 +499,15 @@ function Navbar({ page, setPage }) {
                 <div className="logo-name">MB Patil Foundation</div>
               </div>
             </div>
-            <button style={{ background: "none", border: "none", cursor: "pointer", color: theme.earth }} onClick={() => setMenuOpen(false)}><Icon.Close /></button>
+            <button className="mobile-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu"><Icon.Close /></button>
           </div>
           <div className="mobile-nav-links">
             {pages.map(p => (
-              <div key={p} className={`mobile-nav-link ${page === p ? "active" : ""}`} onClick={() => { setPage(p); setMenuOpen(false); }}>{p}</div>
+              <div key={p} className={`mobile-nav-link ${page === p ? "active" : ""}`}
+                onClick={() => { setPage(p); setMenuOpen(false); }}>{p}</div>
             ))}
           </div>
+          <button className="mobile-donate" onClick={() => { setPage("Contact"); setMenuOpen(false); }}>Donate Now</button>
         </div>
       )}
     </>
@@ -427,76 +520,65 @@ function HomePage({ setPage }) {
     <div>
       {/* HERO */}
       <section style={{
-        minHeight: "100vh",
+        minHeight: "100svh",
         background: `linear-gradient(160deg, ${theme.earth} 0%, #5A3420 55%, ${theme.terracotta} 100%)`,
         position: "relative",
         display: "flex", alignItems: "center",
         overflow: "hidden",
-        padding: "120px 40px 80px",
+        padding: "100px 24px 80px",
       }}>
-        {/* grain overlay */}
-        <div style={{
-          position: "absolute", inset: 0, opacity: 0.04,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-        }} />
-        {/* mandala bg */}
-        <div style={{ position: "absolute", right: "-60px", top: "50%", transform: "translateY(-50%)", opacity: 0.08 }}>
+        <style>{`@media (min-width: 641px) { .hero-section { padding: 120px 40px 80px !important; } }`}</style>
+        <div style={{ position: "absolute", right: "-60px", top: "50%", transform: "translateY(-50%)", opacity: 0.08, pointerEvents: "none" }}>
           <MandalaSVG size={600} opacity={1} />
         </div>
-        <div style={{ position: "absolute", left: "-100px", bottom: "-100px", opacity: 0.05 }}>
+        <div style={{ position: "absolute", left: "-100px", bottom: "-100px", opacity: 0.05, pointerEvents: "none" }}>
           <MandalaSVG size={400} opacity={1} />
         </div>
 
         <div style={{ maxWidth: 1280, margin: "0 auto", width: "100%", position: "relative", zIndex: 1 }}>
           <div style={{ maxWidth: 680, animation: "fadeUp 0.9s ease both" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 32 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
               <div style={{ width: 40, height: 1, background: theme.goldLight }} />
-              <span style={{ fontFamily: "'DM Sans'", fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: theme.goldLight }}>
+              <span style={{ fontFamily: "'DM Sans'", fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.goldLight }}>
                 Est. 2025 · Nilanga, Maharashtra
               </span>
             </div>
             <h1 className="display" style={{
-              fontSize: "clamp(46px, 7vw, 84px)", fontWeight: 400,
+              fontSize: "clamp(40px, 9vw, 84px)", fontWeight: 400,
               color: "white", lineHeight: 1.05,
-              letterSpacing: "-0.01em", marginBottom: 28,
+              letterSpacing: "-0.01em", marginBottom: 24,
             }}>
               Illuminating<br/>
               <em style={{ color: theme.goldLight, fontFamily: "'Cormorant Garamond'", fontStyle: "italic", fontWeight: 300, fontSize: "1.1em" }}>lives</em><br/>
               through service
             </h1>
             <p style={{
-              fontFamily: "'Cormorant Garamond'", fontSize: "clamp(17px, 2.5vw, 22px)",
-              color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: 44,
+              fontFamily: "'Cormorant Garamond'", fontSize: "clamp(16px, 3vw, 22px)",
+              color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: 40,
               fontWeight: 300,
             }}>
               Founded by Muktabai Balaji Patil, the MB Patil Foundation works tirelessly to uplift marginalized communities across Maharashtra through education, health, and rural empowerment.
             </p>
-            <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-              <button className="btn-primary" onClick={() => setPage("About")}>
+            <div className="hero-btns" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+              <button className="btn-primary" style={{ width: "auto" }} onClick={() => setPage("About")}>
                 <span>Discover Our Work</span><span><Icon.Arrow /></span>
               </button>
-              <button className="btn-outline" style={{ color: "white", borderColor: "rgba(255,255,255,0.4)" }} onClick={() => setPage("Programs")}>
+              <button className="btn-outline" style={{ color: "white", borderColor: "rgba(255,255,255,0.4)", width: "auto" }} onClick={() => setPage("Programs")}>
                 <span>Our Programs</span>
               </button>
             </div>
           </div>
 
-          {/* Stats bar */}
-          <div style={{
-            position: "absolute", bottom: -80, right: 0,
-            display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 1, background: "rgba(255,255,255,0.1)",
-            backdropFilter: "blur(20px)",
-            minWidth: 440,
-          }}>
+          {/* Stats bar — stacks on mobile */}
+          <div className="stats-bar">
             {[
               { val: "2500+", label: "Beneficiaries" },
               { val: "₹50 Cr", label: "Project Budget" },
               { val: "5 Yrs", label: "Vision Span" },
             ].map((s, i) => (
-              <div key={i} style={{ padding: "28px 32px", borderLeft: i ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
-                <div className="display" style={{ fontSize: 28, fontWeight: 600, color: theme.goldLight, marginBottom: 4 }}>{s.val}</div>
-                <div style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>{s.label}</div>
+              <div key={i} style={{ padding: "24px 28px", borderLeft: i ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
+                <div className="display" style={{ fontSize: "clamp(22px, 5vw, 28px)", fontWeight: 600, color: theme.goldLight, marginBottom: 4 }}>{s.val}</div>
+                <div style={{ fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)" }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -509,41 +591,41 @@ function HomePage({ setPage }) {
       </section>
 
       {/* What We Do */}
-      <section style={{ padding: "160px 40px 100px", maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 80, alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 120 }}>
+      <section style={{ padding: "clamp(80px, 12vw, 160px) clamp(20px, 5vw, 40px) clamp(60px, 8vw, 100px)", maxWidth: 1280, margin: "0 auto" }}>
+        <div className="grid-2col">
+          <div>
             <div className="section-label" style={{ marginBottom: 20 }}>What we do</div>
-            <h2 className="serif" style={{ fontSize: "clamp(34px, 4vw, 52px)", fontWeight: 300, lineHeight: 1.15, color: theme.earth, marginBottom: 24 }}>
+            <h2 className="serif" style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 300, lineHeight: 1.15, color: theme.earth, marginBottom: 20 }}>
               Three pillars of<br/><em style={{ fontStyle: "italic" }}>lasting change</em>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.8, color: theme.earthLight, marginBottom: 32 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.8, color: theme.earthLight, marginBottom: 28 }}>
               Our work spans education, healthcare, and rural development — creating interconnected systems of support that uplift entire communities.
             </p>
-            <button className="btn-outline" onClick={() => setPage("Programs")}>
+            <button className="btn-outline" style={{ width: "auto" }} onClick={() => setPage("Programs")}>
               <span>All Programs</span><Icon.Arrow />
             </button>
           </div>
-          <div style={{ display: "grid", gap: 24 }}>
+          <div style={{ display: "grid", gap: 20 }}>
             {[
-              { icon: <Icon.Education />, title: "Education & Literacy", desc: "From arts and performing education to digital literacy, we unlock the unique potential in every child from marginalized backgrounds. Over 2,500 children benefit from our structured programs.", accent: theme.saffron },
-              { icon: <Icon.Health />, title: "Health & Wellness", desc: "We provide access to medical care, wellness programs, and preventive healthcare for economically deprived communities — from cardiac care to HIV/AIDS support.", accent: theme.sage },
-              { icon: <Icon.Rural />, title: "Rural Development", desc: "Building infrastructure, enabling livelihoods, and strengthening communities in Latur district and across Maharashtra through sustainable development initiatives.", accent: theme.gold },
+              { icon: <Icon.Education />, title: "Education & Literacy", desc: "From kathak and vocal music to digital literacy, we unlock the unique potential in every child from marginalized backgrounds. Over 2,500 children benefit from our programs.", accent: theme.saffron },
+              { icon: <Icon.Health />, title: "Health & Wellness", desc: "We provide access to medical care, wellness programs, and preventive healthcare — from cardiac care to maternal health support.", accent: theme.sage },
+              { icon: <Icon.Rural />, title: "Rural Development", desc: "Building infrastructure, enabling livelihoods, and strengthening communities in Latur district and across Maharashtra.", accent: theme.gold },
             ].map((item, i) => (
               <div key={i} className="card-hover" style={{
-                background: "white", padding: "40px",
+                background: "white", padding: "clamp(24px, 4vw, 40px)",
                 borderLeft: `4px solid ${item.accent}`,
                 animation: `fadeUp 0.7s ${i * 0.15}s ease both`,
-                display: "grid", gridTemplateColumns: "auto 1fr", gap: 28, alignItems: "start",
+                display: "grid", gridTemplateColumns: "auto 1fr", gap: 20, alignItems: "start",
               }}>
                 <div style={{
-                  width: 56, height: 56, background: `${item.accent}12`,
+                  width: 48, height: 48, background: `${item.accent}12`,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   color: item.accent, flexShrink: 0,
                 }}>
                   {item.icon}
                 </div>
                 <div>
-                  <h3 className="display" style={{ fontSize: 17, fontWeight: 600, color: theme.earth, marginBottom: 12, letterSpacing: "0.02em" }}>{item.title}</h3>
+                  <h3 className="display" style={{ fontSize: 15, fontWeight: 600, color: theme.earth, marginBottom: 10, letterSpacing: "0.02em" }}>{item.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: theme.earthLight }}>{item.desc}</p>
                 </div>
               </div>
@@ -552,29 +634,29 @@ function HomePage({ setPage }) {
         </div>
       </section>
 
-      {/* Women's Empowerment Feature Card */}
+      {/* Women's Empowerment */}
       <section style={{
         background: `linear-gradient(135deg, ${theme.earth} 0%, #2A1A0F 100%)`,
-        padding: "100px 40px",
+        padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)",
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", right: -80, top: -80, opacity: 0.05 }}>
+        <div style={{ position: "absolute", right: -80, top: -80, opacity: 0.05, pointerEvents: "none" }}>
           <MandalaSVG size={500} opacity={1} />
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+          <div className="grid-halves">
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                 <div style={{ width: 30, height: 1, background: theme.goldLight }} />
-                <span style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: theme.goldLight }}>Empowerment Initiative</span>
+                <span style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.goldLight }}>Empowerment Initiative</span>
               </div>
-              <h2 className="serif" style={{ fontSize: "clamp(32px, 4vw, 54px)", fontWeight: 300, color: "white", lineHeight: 1.15, marginBottom: 24 }}>
+              <h2 className="serif" style={{ fontSize: "clamp(28px, 5vw, 54px)", fontWeight: 300, color: "white", lineHeight: 1.15, marginBottom: 20 }}>
                 Standing beside<br/><em style={{ fontStyle: "italic", color: theme.goldLight }}>every woman</em>
               </h2>
-              <p style={{ fontSize: 15, lineHeight: 1.9, color: "rgba(255,255,255,0.7)", marginBottom: 32 }}>
+              <p style={{ fontSize: 15, lineHeight: 1.9, color: "rgba(255,255,255,0.7)", marginBottom: 28 }}>
                 At MB Patil Foundation, women's empowerment is not a program — it is a founding philosophy. Led by Director Muktabai Balaji Patil, we champion women's access to education, healthcare, economic independence, and dignity.
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 40 }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 36 }}>
                 {["Scholarships for girl students from rural areas", "Maternal health & family welfare programs", "Skill development & vocational training centers", "Awareness on women's sanitation and hygiene"].map((item, i) => (
                   <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
                     <div style={{ width: 6, height: 6, borderRadius: "50%", background: theme.goldLight, marginTop: 7, flexShrink: 0 }} />
@@ -582,12 +664,11 @@ function HomePage({ setPage }) {
                   </div>
                 ))}
               </div>
-              <button className="btn-primary" onClick={() => setPage("Programs")} style={{ background: theme.gold }}>
+              <button className="btn-primary" style={{ background: theme.gold, width: "auto" }} onClick={() => setPage("Programs")}>
                 <span>Learn More</span><Icon.Arrow />
               </button>
             </div>
-            {/* Feature card grid */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div className="women-card-grid">
               {[
                 { icon: <Icon.Women />, title: "Gender Equality", body: "Promoting equal access to education and opportunity for all girls and women." },
                 { icon: <Icon.Heart />, title: "Healthcare Access", body: "Maternal wellness, nutrition support, and family health programs." },
@@ -597,17 +678,15 @@ function HomePage({ setPage }) {
                 <div key={i} style={{
                   background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(255,255,255,0.1)",
-                  padding: "28px 24px",
-                  backdropFilter: "blur(10px)",
+                  padding: "24px 20px",
                   transition: "background 0.3s, border-color 0.3s",
-                  cursor: "default",
                 }}
                   onMouseEnter={e => { e.currentTarget.style.background = "rgba(200,81,10,0.15)"; e.currentTarget.style.borderColor = `${theme.saffron}60`; }}
                   onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
                 >
-                  <div style={{ color: theme.goldLight, marginBottom: 16 }}>{card.icon}</div>
-                  <div className="display" style={{ fontSize: 13, fontWeight: 600, color: "white", letterSpacing: "0.04em", marginBottom: 10 }}>{card.title}</div>
-                  <p style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>{card.body}</p>
+                  <div style={{ color: theme.goldLight, marginBottom: 14 }}>{card.icon}</div>
+                  <div className="display" style={{ fontSize: 12, fontWeight: 600, color: "white", letterSpacing: "0.04em", marginBottom: 8 }}>{card.title}</div>
+                  <p style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>{card.body}</p>
                 </div>
               ))}
             </div>
@@ -616,27 +695,27 @@ function HomePage({ setPage }) {
       </section>
 
       {/* Quote */}
-      <section style={{ padding: "100px 40px", background: theme.saffronPale, overflow: "hidden", position: "relative" }}>
-        <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", opacity: 0.04 }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", background: theme.saffronPale, overflow: "hidden", position: "relative" }}>
+        <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", opacity: 0.04, pointerEvents: "none" }}>
           <MandalaSVG size={500} opacity={1} />
         </div>
         <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <div style={{ color: theme.saffron, opacity: 0.3, marginBottom: 32, display: "flex", justifyContent: "center" }}>
+          <div style={{ color: theme.saffron, opacity: 0.3, marginBottom: 28, display: "flex", justifyContent: "center" }}>
             <Icon.Quote />
           </div>
           <p className="serif" style={{
-            fontSize: "clamp(22px, 3.5vw, 36px)", fontWeight: 300, fontStyle: "italic",
-            color: theme.earth, lineHeight: 1.5, marginBottom: 32,
+            fontSize: "clamp(19px, 4vw, 36px)", fontWeight: 300, fontStyle: "italic",
+            color: theme.earth, lineHeight: 1.5, marginBottom: 28,
           }}>
             We believe every child deserves to dream, every woman deserves dignity, and every community deserves the resources to flourish.
           </p>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-            <div style={{ width: 44, height: 44, borderRadius: "50%", background: theme.saffron, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14 }}>
+            <div style={{ width: 44, height: 44, borderRadius: "50%", background: theme.saffron, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               <span style={{ fontFamily: "'Cinzel'", fontSize: 14, color: "white", fontWeight: 600 }}>M</span>
             </div>
-            <div>
-              <div className="display" style={{ fontSize: 13, fontWeight: 600, color: theme.earth, letterSpacing: "0.08em" }}>Muktabai Balaji Patil</div>
-              <div style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: theme.saffron }}>Founder & Director</div>
+            <div style={{ textAlign: "left" }}>
+              <div className="display" style={{ fontSize: 12, fontWeight: 600, color: theme.earth, letterSpacing: "0.08em" }}>Muktabai Balaji Patil</div>
+              <div style={{ fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: theme.saffron }}>Founder & Director</div>
             </div>
           </div>
         </div>
@@ -644,25 +723,25 @@ function HomePage({ setPage }) {
 
       {/* CTA Banner */}
       <section style={{
-        background: theme.saffron, padding: "80px 40px",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        flexWrap: "wrap", gap: 32,
+        background: theme.saffron, padding: "clamp(48px, 8vw, 80px) clamp(20px, 5vw, 40px)",
       }}>
-        <div style={{ maxWidth: 600 }}>
-          <h2 className="serif" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "white", lineHeight: 1.2, marginBottom: 12 }}>
-            Join us in building a more equitable Maharashtra
-          </h2>
-          <p style={{ color: "rgba(255,255,255,0.8)", fontSize: 15 }}>Your support can transform lives in Latur and beyond.</p>
-        </div>
-        <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-          <button style={{ background: "white", color: theme.saffron, padding: "16px 36px", border: "none", cursor: "pointer", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", transition: "all 0.3s" }}
-            onClick={() => setPage("Contact")}>
-            Partner With Us
-          </button>
-          <button style={{ background: "transparent", color: "white", padding: "15px 35px", border: "1px solid rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" }}
-            onClick={() => setPage("Contact")}>
-            Get In Touch
-          </button>
+        <div className="cta-banner">
+          <div style={{ maxWidth: 600 }}>
+            <h2 className="serif" style={{ fontSize: "clamp(24px, 5vw, 44px)", fontWeight: 300, color: "white", lineHeight: 1.2, marginBottom: 10 }}>
+              Join us in building a more equitable Maharashtra
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.8)", fontSize: 15 }}>Your support can transform lives in Latur and beyond.</p>
+          </div>
+          <div className="cta-btns">
+            <button style={{ background: "white", color: theme.saffron, padding: "16px 32px", border: "none", cursor: "pointer", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", transition: "all 0.3s", minHeight: 52 }}
+              onClick={() => setPage("Contact")}>
+              Partner With Us
+            </button>
+            <button style={{ background: "transparent", color: "white", padding: "15px 31px", border: "1px solid rgba(255,255,255,0.5)", cursor: "pointer", fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", minHeight: 52 }}
+              onClick={() => setPage("Contact")}>
+              Get In Touch
+            </button>
+          </div>
         </div>
       </section>
     </div>
@@ -688,28 +767,29 @@ function AboutPage() {
       {/* Header */}
       <div style={{
         background: `linear-gradient(170deg, ${theme.saffronPale} 0%, white 100%)`,
-        padding: "100px 40px 80px",
+        padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px) clamp(48px, 7vw, 80px)",
         borderBottom: `1px solid rgba(200,81,10,0.1)`,
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", right: -100, top: -100, opacity: 0.08 }}>
+        <div style={{ position: "absolute", right: -100, top: -100, opacity: 0.08, pointerEvents: "none" }}>
           <MandalaSVG size={450} opacity={1} />
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="section-label" style={{ marginBottom: 20 }}>Our Story</div>
-          <h1 className="serif" style={{ fontSize: "clamp(38px, 5vw, 68px)", fontWeight: 300, color: theme.earth, lineHeight: 1.1, maxWidth: 700 }}>
+          <h1 className="serif" style={{ fontSize: "clamp(34px, 7vw, 68px)", fontWeight: 300, color: theme.earth, lineHeight: 1.1, maxWidth: 700 }}>
             About MB Patil<br/><em style={{ fontStyle: "italic" }}>Foundation</em>
           </h1>
         </div>
       </div>
 
       {/* Director Profile */}
-      <section style={{ padding: "100px 40px", maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 80, alignItems: "center" }}>
-          <div>
-            <div style={{ position: "relative", display: "inline-block" }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", maxWidth: 1280, margin: "0 auto" }}>
+        <div className="grid-halves">
+          {/* Portrait card */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ position: "relative" }}>
               <div style={{
-                width: 340, height: 420,
+                width: "min(300px, 85vw)", height: 380,
                 background: `linear-gradient(145deg, ${theme.saffronPale}, ${theme.offWhite})`,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 flexDirection: "column", gap: 20,
@@ -717,25 +797,25 @@ function AboutPage() {
                 position: "relative", overflow: "hidden",
               }}>
                 <div style={{ position: "absolute", inset: 0, opacity: 0.08 }}>
-                  <MandalaSVG size={340} opacity={1} />
+                  <MandalaSVG size={300} opacity={1} />
                 </div>
                 <div style={{
-                  width: 110, height: 110, borderRadius: "50%",
+                  width: 100, height: 100, borderRadius: "50%",
                   background: `linear-gradient(135deg, ${theme.saffron}, ${theme.terracotta})`,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   position: "relative", zIndex: 1,
                 }}>
-                  <span className="display" style={{ fontSize: 40, color: "white", fontWeight: 600 }}>M</span>
+                  <span className="display" style={{ fontSize: 36, color: "white", fontWeight: 600 }}>M</span>
                 </div>
                 <div style={{ textAlign: "center", position: "relative", zIndex: 1, padding: "0 24px" }}>
-                  <div className="display" style={{ fontSize: 18, fontWeight: 600, color: theme.earth, marginBottom: 6, letterSpacing: "0.04em" }}>Muktabai Balaji Patil</div>
-                  <div style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 16 }}>Founder & Director</div>
+                  <div className="display" style={{ fontSize: 16, fontWeight: 600, color: theme.earth, marginBottom: 6, letterSpacing: "0.04em" }}>Muktabai Balaji Patil</div>
+                  <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 16 }}>Founder & Director</div>
                   <div style={{ display: "flex", justifyContent: "center" }}><LotusSVG /></div>
                 </div>
               </div>
               <div style={{
-                position: "absolute", bottom: -20, right: -20,
-                width: 80, height: 80,
+                position: "absolute", bottom: -16, right: -16,
+                width: 64, height: 64,
                 background: theme.saffron,
                 display: "flex", alignItems: "center", justifyContent: "center",
               }}>
@@ -745,25 +825,25 @@ function AboutPage() {
           </div>
           <div>
             <div className="section-label" style={{ marginBottom: 24 }}>Leadership</div>
-            <h2 className="serif" style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontWeight: 300, color: theme.earth, lineHeight: 1.2, marginBottom: 28 }}>
+            <h2 className="serif" style={{ fontSize: "clamp(26px, 4vw, 46px)", fontWeight: 300, color: theme.earth, lineHeight: 1.2, marginBottom: 24 }}>
               A vision rooted in<br/><em style={{ fontStyle: "italic" }}>compassion</em>
             </h2>
-            <p style={{ fontSize: 15, lineHeight: 1.9, color: theme.earthLight, marginBottom: 20 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.9, color: theme.earthLight, marginBottom: 18 }}>
               Mrs. Muktabai Balaji Patil, born in 1990 in the village of Hallali Devi, Nilanga, Latur, founded MB Patil Foundation out of a deep personal conviction that no child should be denied education due to circumstance, and no family should face health crises without support.
             </p>
-            <p style={{ fontSize: 15, lineHeight: 1.9, color: theme.earthLight, marginBottom: 32 }}>
-              Co-directed with Mr. Balaji Sharadrao Patil, the foundation was incorporated on August 4, 2025 under the Companies Act as a Section 8 non-profit company — a new organization with an ancient sense of duty to community.
+            <p style={{ fontSize: 15, lineHeight: 1.9, color: theme.earthLight, marginBottom: 28 }}>
+              Co-directed with Mr. Balaji Sharadrao Patil, the foundation was incorporated on August 4, 2025 under the Companies Act as a Section 8 non-profit company.
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div className="about-detail-grid">
               {[
                 { label: "CIN", value: "U85500MH2025NPL453631" },
                 { label: "PAN", value: "AATCM6790M" },
                 { label: "Incorporated", value: "4 August 2025" },
                 { label: "State", value: "Maharashtra, India" },
               ].map((item, i) => (
-                <div key={i} style={{ padding: "18px 20px", background: theme.offWhite, borderLeft: `3px solid ${theme.saffron}` }}>
-                  <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 6 }}>{item.label}</div>
-                  <div style={{ fontSize: 14, color: theme.earth, fontWeight: 500, fontFamily: "'DM Sans'" }}>{item.value}</div>
+                <div key={i} style={{ padding: "16px 18px", background: theme.offWhite, borderLeft: `3px solid ${theme.saffron}` }}>
+                  <div style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 5 }}>{item.label}</div>
+                  <div style={{ fontSize: 13, color: theme.earth, fontWeight: 500, fontFamily: "'DM Sans'", wordBreak: "break-all" }}>{item.value}</div>
                 </div>
               ))}
             </div>
@@ -772,21 +852,21 @@ function AboutPage() {
       </section>
 
       {/* Vision & Mission */}
-      <section style={{ background: theme.earth, padding: "100px 40px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", opacity: 0.04 }}>
+      <section style={{ background: theme.earth, padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", opacity: 0.04, pointerEvents: "none" }}>
           <MandalaSVG size={700} opacity={1} />
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ textAlign: "center", marginBottom: 70 }}>
+          <div style={{ textAlign: "center", marginBottom: 52 }}>
             <div className="section-label" style={{ justifyContent: "center", marginBottom: 16, color: theme.goldLight }}>
               <span style={{ background: theme.goldLight }} />
               Our Beliefs
             </div>
-            <h2 className="serif" style={{ fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 300, color: "white", lineHeight: 1.2 }}>
+            <h2 className="serif" style={{ fontSize: "clamp(28px, 5vw, 52px)", fontWeight: 300, color: "white", lineHeight: 1.2 }}>
               Vision &amp; <em style={{ fontStyle: "italic", color: theme.goldLight }}>Mission</em>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}>
+          <div className="grid-3col">
             {[
               { num: "01", title: "Inspiring Lifelong Learning", body: "To be a center of excellence that nurtures innovation, critical thinking, and holistic development — empowering learners to become responsible global citizens." },
               { num: "02", title: "Empowerment & Equity", body: "To create an inclusive environment where every student, regardless of background, has the opportunity to realize their full potential and contribute to society." },
@@ -794,15 +874,15 @@ function AboutPage() {
             ].map((item, i) => (
               <div key={i} style={{
                 background: "rgba(255,255,255,0.04)",
-                padding: "48px 40px",
-                borderRight: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                padding: "40px 32px",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
                 transition: "background 0.3s",
               }}
                 onMouseEnter={e => e.currentTarget.style.background = "rgba(200,81,10,0.12)"}
                 onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.04)"}
               >
-                <div style={{ fontFamily: "'Cinzel'", fontSize: 48, fontWeight: 700, color: "rgba(255,255,255,0.06)", marginBottom: 20, lineHeight: 1 }}>{item.num}</div>
-                <h3 className="display" style={{ fontSize: 16, fontWeight: 600, color: "white", letterSpacing: "0.04em", marginBottom: 16 }}>{item.title}</h3>
+                <div style={{ fontFamily: "'Cinzel'", fontSize: 42, fontWeight: 700, color: "rgba(255,255,255,0.06)", marginBottom: 16, lineHeight: 1 }}>{item.num}</div>
+                <h3 className="display" style={{ fontSize: 15, fontWeight: 600, color: "white", letterSpacing: "0.04em", marginBottom: 14 }}>{item.title}</h3>
                 <p style={{ fontSize: 14, lineHeight: 1.8, color: "rgba(255,255,255,0.6)" }}>{item.body}</p>
               </div>
             ))}
@@ -811,27 +891,24 @@ function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section style={{ padding: "100px 40px", maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", maxWidth: 1280, margin: "0 auto" }}>
         <div className="section-label" style={{ marginBottom: 20 }}>Trust & Transparency</div>
-        <h2 className="serif" style={{ fontSize: "clamp(28px, 3.5vw, 46px)", fontWeight: 300, color: theme.earth, marginBottom: 50, lineHeight: 1.2 }}>
+        <h2 className="serif" style={{ fontSize: "clamp(26px, 4vw, 46px)", fontWeight: 300, color: theme.earth, marginBottom: 40, lineHeight: 1.2 }}>
           Certified &amp; <em style={{ fontStyle: "italic" }}>compliant</em>
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 16 }}>
+        <div className="cert-grid">
           {certs.map((cert, i) => (
             <div key={i} style={{
               display: "flex", alignItems: "center", gap: 16,
-              padding: "20px 24px", background: theme.offWhite,
+              padding: "18px 20px", background: theme.offWhite,
               border: "1px solid transparent",
               transition: "border-color 0.3s, background 0.3s",
-              cursor: "default",
+              minHeight: 52,
             }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = theme.saffron; e.currentTarget.style.background = theme.saffronPale; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = theme.offWhite; }}
             >
-              <div style={{
-                width: 10, height: 10, borderRadius: "50%",
-                background: theme.saffron, flexShrink: 0,
-              }} />
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: theme.saffron, flexShrink: 0 }} />
               <span style={{ fontSize: 14, color: theme.earthLight, lineHeight: 1.4 }}>{cert}</span>
             </div>
           ))}
@@ -886,18 +963,18 @@ function ProgramsPage() {
     <div style={{ paddingTop: 80 }}>
       <div style={{
         background: `linear-gradient(170deg, ${theme.earth} 0%, #3D2B1F 100%)`,
-        padding: "100px 40px 140px",
+        padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px) clamp(80px, 12vw, 140px)",
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", right: -80, bottom: -80, opacity: 0.06 }}>
+        <div style={{ position: "absolute", right: -80, bottom: -80, opacity: 0.06, pointerEvents: "none" }}>
           <MandalaSVG size={450} opacity={1} />
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
             <div style={{ width: 30, height: 1, background: theme.goldLight }} />
-            <span style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: theme.goldLight }}>What we offer</span>
+            <span style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.goldLight }}>What we offer</span>
           </div>
-          <h1 className="serif" style={{ fontSize: "clamp(38px, 5vw, 68px)", fontWeight: 300, color: "white", lineHeight: 1.1, maxWidth: 600 }}>
+          <h1 className="serif" style={{ fontSize: "clamp(34px, 7vw, 68px)", fontWeight: 300, color: "white", lineHeight: 1.1, maxWidth: 600 }}>
             Programs that<br/><em style={{ fontStyle: "italic", color: theme.goldLight }}>transform</em>
           </h1>
         </div>
@@ -906,37 +983,36 @@ function ProgramsPage() {
         </svg>
       </div>
 
-      <section style={{ padding: "100px 40px", maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ display: "grid", gap: 40 }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", maxWidth: 1280, margin: "0 auto" }}>
+        <div style={{ display: "grid", gap: 32 }}>
           {programs.map((prog, i) => (
             <div key={i} className="card-hover" style={{
-              display: "grid",
-              gridTemplateColumns: "auto 1fr auto",
-              gap: 48, alignItems: "center",
               background: "white",
-              padding: "48px 56px",
+              padding: "clamp(24px, 4vw, 48px) clamp(20px, 4vw, 48px)",
               borderBottom: `3px solid ${prog.color}`,
               animation: `fadeUp 0.6s ${i * 0.12}s ease both`,
             }}>
-              <div style={{
-                width: 80, height: 80,
-                background: `${prog.color}12`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: prog.color, flexShrink: 0,
-              }}>
-                <div style={{ transform: "scale(1.5)" }}>{prog.icon}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: prog.color, marginBottom: 10 }}>{prog.tag}</div>
-                <h3 className="display" style={{ fontSize: 22, fontWeight: 600, color: theme.earth, marginBottom: 16, letterSpacing: "0.02em" }}>{prog.title}</h3>
-                <p style={{ fontSize: 15, lineHeight: 1.8, color: theme.earthLight, maxWidth: 560 }}>{prog.desc}</p>
-              </div>
-              <div style={{ textAlign: "right", flexShrink: 0 }}>
-                <div style={{ padding: "14px 24px", background: `${prog.color}10`, borderLeft: `3px solid ${prog.color}`, marginBottom: 12 }}>
-                  <div style={{ fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: prog.color, marginBottom: 4 }}>Reach</div>
-                  <div style={{ fontSize: 16, fontWeight: 600, color: theme.earth, fontFamily: "'DM Sans'" }}>{prog.reach}</div>
+              <div className="grid-program-row">
+                <div style={{
+                  width: 72, height: 72,
+                  background: `${prog.color}12`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: prog.color, flexShrink: 0,
+                }}>
+                  <div style={{ transform: "scale(1.4)" }}>{prog.icon}</div>
                 </div>
-                <div style={{ fontSize: 12, color: theme.earthLight }}>{prog.budget}</div>
+                <div>
+                  <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: prog.color, marginBottom: 8 }}>{prog.tag}</div>
+                  <h3 className="display" style={{ fontSize: "clamp(16px, 3vw, 22px)", fontWeight: 600, color: theme.earth, marginBottom: 12, letterSpacing: "0.02em" }}>{prog.title}</h3>
+                  <p style={{ fontSize: 14, lineHeight: 1.8, color: theme.earthLight }}>{prog.desc}</p>
+                </div>
+                <div style={{ paddingTop: 4 }}>
+                  <div style={{ padding: "12px 20px", background: `${prog.color}10`, borderLeft: `3px solid ${prog.color}`, marginBottom: 10, minWidth: 140 }}>
+                    <div style={{ fontSize: 9, letterSpacing: "0.15em", textTransform: "uppercase", color: prog.color, marginBottom: 3 }}>Reach</div>
+                    <div style={{ fontSize: 15, fontWeight: 600, color: theme.earth, fontFamily: "'DM Sans'" }}>{prog.reach}</div>
+                  </div>
+                  <div style={{ fontSize: 12, color: theme.earthLight }}>{prog.budget}</div>
+                </div>
               </div>
             </div>
           ))}
@@ -944,15 +1020,15 @@ function ProgramsPage() {
       </section>
 
       {/* Budget breakdown */}
-      <section style={{ background: theme.offWhite, padding: "100px 40px" }}>
+      <section style={{ background: theme.offWhite, padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 60 }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div className="section-label" style={{ justifyContent: "center", marginBottom: 16 }}>Financial Transparency</div>
-            <h2 className="serif" style={{ fontSize: "clamp(30px, 4vw, 48px)", fontWeight: 300, color: theme.earth }}>
+            <h2 className="serif" style={{ fontSize: "clamp(26px, 4vw, 48px)", fontWeight: 300, color: theme.earth }}>
               ₹50 Crore. <em style={{ fontStyle: "italic" }}>Every rupee counts.</em>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 2 }}>
+          <div className="budget-grid">
             {[
               { label: "Infrastructure", pct: 40, amt: "₹20 Cr", color: theme.saffron },
               { label: "Digital Learning", pct: 20, amt: "₹10 Cr", color: theme.gold },
@@ -962,9 +1038,9 @@ function ProgramsPage() {
               { label: "Monitoring", pct: 4, amt: "₹2 Cr", color: theme.earth },
               { label: "Admin", pct: 6, amt: "₹3 Cr", color: "#8B7355" },
             ].map((item, i) => (
-              <div key={i} style={{ padding: "32px 28px", background: "white", borderTop: `4px solid ${item.color}` }}>
-                <div style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 700, fontFamily: "'Cinzel'", color: item.color, marginBottom: 8, lineHeight: 1 }}>{item.pct}%</div>
-                <div style={{ fontSize: 13, color: theme.earth, fontWeight: 500, marginBottom: 4 }}>{item.label}</div>
+              <div key={i} style={{ padding: "28px 24px", background: "white", borderTop: `4px solid ${item.color}` }}>
+                <div style={{ fontSize: "clamp(28px, 6vw, 40px)", fontWeight: 700, fontFamily: "'Cinzel'", color: item.color, marginBottom: 6, lineHeight: 1 }}>{item.pct}%</div>
+                <div style={{ fontSize: 13, color: theme.earth, fontWeight: 500, marginBottom: 3 }}>{item.label}</div>
                 <div style={{ fontSize: 12, color: theme.earthLight }}>{item.amt}</div>
               </div>
             ))}
@@ -981,23 +1057,23 @@ function ImpactPage() {
     <div style={{ paddingTop: 80 }}>
       <div style={{
         background: `linear-gradient(150deg, ${theme.saffronPale} 0%, white 100%)`,
-        padding: "100px 40px 80px",
+        padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px) clamp(48px, 7vw, 80px)",
         borderBottom: `1px solid rgba(200,81,10,0.1)`,
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", right: -60, top: -60, opacity: 0.07 }}>
+        <div style={{ position: "absolute", right: -60, top: -60, opacity: 0.07, pointerEvents: "none" }}>
           <MandalaSVG size={400} opacity={1} />
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="section-label" style={{ marginBottom: 20 }}>Making a difference</div>
-          <h1 className="serif" style={{ fontSize: "clamp(38px, 5vw, 68px)", fontWeight: 300, color: theme.earth, lineHeight: 1.1, maxWidth: 600 }}>
+          <h1 className="serif" style={{ fontSize: "clamp(34px, 7vw, 68px)", fontWeight: 300, color: theme.earth, lineHeight: 1.1, maxWidth: 600 }}>
             Measuring our<br/><em style={{ fontStyle: "italic" }}>impact</em>
           </h1>
         </div>
       </div>
 
-      <section style={{ padding: "100px 40px", maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 24, marginBottom: 80 }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", maxWidth: 1280, margin: "0 auto" }}>
+        <div className="impact-grid" style={{ marginBottom: 72 }}>
           {[
             { val: "1 Lakh+", label: "Students to benefit", desc: "Improved learning environments across rural Maharashtra" },
             { val: "5,000", label: "Teachers trained", desc: "Digital pedagogy and skill development workshops" },
@@ -1007,17 +1083,14 @@ function ImpactPage() {
             { val: "5 Years", label: "Project duration", desc: "From baseline survey to sustainability planning" },
           ].map((stat, i) => (
             <div key={i} style={{
-              padding: "40px 32px",
+              padding: "32px 24px",
               background: i % 2 === 0 ? theme.offWhite : "white",
               border: `1px solid rgba(200,81,10,0.08)`,
               position: "relative", overflow: "hidden",
               animation: `fadeUp 0.6s ${i * 0.1}s ease both`,
             }}>
-              <div style={{ position: "absolute", right: -20, bottom: -20, opacity: 0.04 }}>
-                <MandalaSVG size={100} opacity={1} />
-              </div>
-              <div className="display" style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 700, color: theme.saffron, lineHeight: 1, marginBottom: 10 }}>{stat.val}</div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: theme.earth, marginBottom: 8 }}>{stat.label}</div>
+              <div className="display" style={{ fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 700, color: theme.saffron, lineHeight: 1, marginBottom: 8 }}>{stat.val}</div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: theme.earth, marginBottom: 6 }}>{stat.label}</div>
               <div style={{ fontSize: 13, color: theme.earthLight, lineHeight: 1.6 }}>{stat.desc}</div>
             </div>
           ))}
@@ -1026,17 +1099,17 @@ function ImpactPage() {
         {/* Timeline */}
         <div>
           <div className="section-label" style={{ marginBottom: 20 }}>Implementation Roadmap</div>
-          <h2 className="serif" style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, color: theme.earth, marginBottom: 60, lineHeight: 1.2 }}>
+          <h2 className="serif" style={{ fontSize: "clamp(26px, 4vw, 44px)", fontWeight: 300, color: theme.earth, marginBottom: 52, lineHeight: 1.2 }}>
             Five-year <em style={{ fontStyle: "italic" }}>journey</em>
           </h2>
           <div style={{ position: "relative" }}>
-            <div style={{ position: "absolute", left: 28, top: 0, bottom: 0, width: 2, background: `linear-gradient(to bottom, ${theme.saffron}, transparent)` }} />
+            <div style={{ position: "absolute", left: 27, top: 0, bottom: 0, width: 2, background: `linear-gradient(to bottom, ${theme.saffron}, transparent)` }} />
             {[
               { year: "Year 1", title: "Foundation & Survey", body: "Baseline survey across Latur district, infrastructure planning, pilot education centers, and initial community engagement programs." },
               { year: "Years 2–4", title: "Full-Scale Implementation", body: "Renovation of 100 schools, smart classroom deployment, teacher training at scale, scholarship disbursement, and Project Deepak launch." },
               { year: "Year 5", title: "Evaluation & Sustainability", body: "Impact assessment, knowledge dissemination, community leadership handover, digital platform launch, and long-term government partnership formalization." },
             ].map((step, i) => (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: 40, marginBottom: 48, position: "relative" }}>
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: "clamp(20px, 4vw, 40px)", marginBottom: 44, position: "relative" }}>
                 <div style={{
                   width: 56, height: 56, borderRadius: "50%",
                   background: i === 0 ? theme.saffron : "white",
@@ -1044,12 +1117,12 @@ function ImpactPage() {
                   display: "flex", alignItems: "center", justifyContent: "center",
                   flexShrink: 0, position: "relative", zIndex: 1,
                 }}>
-                  <span style={{ fontSize: 16, fontWeight: 700, fontFamily: "'Cinzel'", color: i === 0 ? "white" : theme.saffron }}>{i + 1}</span>
+                  <span style={{ fontSize: 15, fontWeight: 700, fontFamily: "'Cinzel'", color: i === 0 ? "white" : theme.saffron }}>{i + 1}</span>
                 </div>
                 <div style={{ paddingTop: 10 }}>
-                  <div style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 8 }}>{step.year}</div>
-                  <h3 className="display" style={{ fontSize: 20, fontWeight: 600, color: theme.earth, marginBottom: 12, letterSpacing: "0.02em" }}>{step.title}</h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.8, color: theme.earthLight, maxWidth: 600 }}>{step.body}</p>
+                  <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 6 }}>{step.year}</div>
+                  <h3 className="display" style={{ fontSize: "clamp(16px, 3vw, 20px)", fontWeight: 600, color: theme.earth, marginBottom: 10, letterSpacing: "0.02em" }}>{step.title}</h3>
+                  <p style={{ fontSize: 14, lineHeight: 1.8, color: theme.earthLight }}>{step.body}</p>
                 </div>
               </div>
             ))}
@@ -1058,13 +1131,13 @@ function ImpactPage() {
       </section>
 
       {/* SDG alignment */}
-      <section style={{ background: theme.earth, padding: "80px 40px" }}>
+      <section style={{ background: theme.earth, padding: "clamp(48px, 8vw, 80px) clamp(20px, 5vw, 40px)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto", textAlign: "center" }}>
-          <p style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: theme.goldLight, marginBottom: 20 }}>Aligned with</p>
-          <h3 className="serif" style={{ fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 300, color: "white", marginBottom: 16 }}>
+          <p style={{ fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: theme.goldLight, marginBottom: 16 }}>Aligned with</p>
+          <h3 className="serif" style={{ fontSize: "clamp(18px, 3vw, 36px)", fontWeight: 300, color: "white", marginBottom: 14, lineHeight: 1.4 }}>
             UN Sustainable Development Goal 4 — <em style={{ fontStyle: "italic", color: theme.goldLight }}>Quality Education</em>
           </h3>
-          <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", maxWidth: 500, margin: "0 auto" }}>
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", maxWidth: 500, margin: "0 auto", lineHeight: 1.7 }}>
             All activities conform to Schedule VII of the Companies Act, 2013 and CSR Rules (Amended 2021).
           </p>
         </div>
@@ -1086,18 +1159,18 @@ function ContactPage() {
     <div style={{ paddingTop: 80 }}>
       <div style={{
         background: `linear-gradient(170deg, ${theme.earth} 0%, #3D2B1F 100%)`,
-        padding: "100px 40px 140px",
+        padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px) clamp(80px, 12vw, 140px)",
         position: "relative", overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", right: -60, top: -60, opacity: 0.06 }}>
+        <div style={{ position: "absolute", right: -60, top: -60, opacity: 0.06, pointerEvents: "none" }}>
           <MandalaSVG size={450} opacity={1} />
         </div>
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
             <div style={{ width: 30, height: 1, background: theme.goldLight }} />
-            <span style={{ fontSize: 11, letterSpacing: "0.25em", textTransform: "uppercase", color: theme.goldLight }}>Reach out</span>
+            <span style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.goldLight }}>Reach out</span>
           </div>
-          <h1 className="serif" style={{ fontSize: "clamp(38px, 5vw, 68px)", fontWeight: 300, color: "white", lineHeight: 1.1, maxWidth: 600 }}>
+          <h1 className="serif" style={{ fontSize: "clamp(30px, 7vw, 68px)", fontWeight: 300, color: "white", lineHeight: 1.1, maxWidth: 600 }}>
             Let's build something<br/><em style={{ fontStyle: "italic", color: theme.goldLight }}>meaningful together</em>
           </h1>
         </div>
@@ -1106,82 +1179,69 @@ function ContactPage() {
         </svg>
       </div>
 
-      <section style={{ padding: "100px 40px", maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 80, alignItems: "start" }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", maxWidth: 1280, margin: "0 auto" }}>
+        <div className="grid-contact">
           {/* Info side */}
           <div>
             <div className="section-label" style={{ marginBottom: 24 }}>Find us</div>
-            <h2 className="serif" style={{ fontSize: "clamp(26px, 3vw, 38px)", fontWeight: 300, color: theme.earth, marginBottom: 40, lineHeight: 1.2 }}>
+            <h2 className="serif" style={{ fontSize: "clamp(24px, 4vw, 38px)", fontWeight: 300, color: theme.earth, marginBottom: 36, lineHeight: 1.2 }}>
               MB Patil<br/><em style={{ fontStyle: "italic" }}>Foundation</em>
             </h2>
 
             {[
-              {
-                icon: <Icon.Location />,
-                label: "Address",
-                content: "A.P. Hallali Devi, Nilanga,\nLatur – 413521, Maharashtra, India",
-              },
-              {
-                icon: <Icon.Mail />,
-                label: "Email",
-                content: "balajipatil1080@gmail.com",
-              },
-              {
-                icon: <Icon.Phone />,
-                label: "Phone",
-                content: "93**16**42",
-              },
+              { icon: <Icon.Location />, label: "Address", content: "A.P. Hallali Devi, Nilanga,\nLatur – 413521, Maharashtra, India" },
+              { icon: <Icon.Mail />, label: "Email", content: "balajipatil1080@gmail.com" },
+              { icon: <Icon.Phone />, label: "Phone", content: "93**16**42" },
             ].map((info, i) => (
-              <div key={i} style={{ display: "flex", gap: 20, marginBottom: 32, alignItems: "flex-start" }}>
+              <div key={i} style={{ display: "flex", gap: 18, marginBottom: 28, alignItems: "flex-start" }}>
                 <div style={{
-                  width: 48, height: 48, background: theme.saffronPale,
+                  width: 44, height: 44, background: theme.saffronPale,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   color: theme.saffron, flexShrink: 0,
                 }}>
                   {info.icon}
                 </div>
                 <div>
-                  <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 6 }}>{info.label}</div>
-                  <div style={{ fontSize: 15, color: theme.earth, lineHeight: 1.6, whiteSpace: "pre-line" }}>{info.content}</div>
+                  <div style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.saffron, marginBottom: 5 }}>{info.label}</div>
+                  <div style={{ fontSize: 14, color: theme.earth, lineHeight: 1.6, whiteSpace: "pre-line", wordBreak: "break-word" }}>{info.content}</div>
                 </div>
               </div>
             ))}
 
-            {/* Map embed area */}
             <div style={{
-              width: "100%", height: 260,
+              width: "100%", height: 240,
               background: theme.offWhite,
               border: `1px solid rgba(200,81,10,0.15)`,
               position: "relative", overflow: "hidden",
-              marginTop: 16,
+              marginTop: 12,
             }}>
               <iframe
                 title="MB Patil Foundation Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30296.0!2d76.8347!3d17.6869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc832e1d3e47f59%3A0x5d2e4ce152e34c58!2sNilanga%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1704000000000!5m2!1sen!2sin"
-                width="100%" height="260" style={{ border: 0 }}
+                width="100%" height="240" style={{ border: 0 }}
                 allowFullScreen loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
               <div style={{
                 position: "absolute", bottom: 0, left: 0, right: 0,
-                padding: "12px 16px",
+                padding: "10px 14px",
                 background: "rgba(61,43,31,0.85)",
-                display: "flex", alignItems: "center", gap: 10,
+                display: "flex", alignItems: "center", gap: 8,
               }}>
                 <Icon.Location />
-                <span style={{ fontSize: 13, color: "white", fontFamily: "'DM Sans'" }}>Devi Hallali, Nilanga, Latur — Maharashtra</span>
+                <span style={{ fontSize: 12, color: "white", fontFamily: "'DM Sans'" }}>Devi Hallali, Nilanga, Latur</span>
               </div>
             </div>
           </div>
 
           {/* Form side */}
-          <div style={{ background: "white", padding: "56px 48px", boxShadow: "0 24px 80px rgba(61,43,31,0.08)" }}>
+          <div style={{ background: "white", padding: "clamp(28px, 5vw, 56px) clamp(20px, 5vw, 48px)", boxShadow: "0 24px 80px rgba(61,43,31,0.08)" }}>
             {submitted ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
                 <div style={{ width: 64, height: 64, borderRadius: "50%", background: theme.saffronPale, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px", color: theme.saffron }}>
                   <Icon.Heart />
                 </div>
-                <h3 className="serif" style={{ fontSize: 32, fontWeight: 300, color: theme.earth, marginBottom: 16, lineHeight: 1.2 }}>
+                <h3 className="serif" style={{ fontSize: "clamp(24px, 4vw, 32px)", fontWeight: 300, color: theme.earth, marginBottom: 16, lineHeight: 1.2 }}>
                   Thank you, <em style={{ fontStyle: "italic" }}>{form.name}!</em>
                 </h3>
                 <p style={{ fontSize: 15, color: theme.earthLight, lineHeight: 1.7 }}>
@@ -1190,38 +1250,38 @@ function ContactPage() {
               </div>
             ) : (
               <>
-                <div className="section-label" style={{ marginBottom: 24 }}>Send a message</div>
-                <h3 className="serif" style={{ fontSize: 28, fontWeight: 300, color: theme.earth, marginBottom: 36, lineHeight: 1.2 }}>
+                <div className="section-label" style={{ marginBottom: 20 }}>Send a message</div>
+                <h3 className="serif" style={{ fontSize: "clamp(22px, 3vw, 28px)", fontWeight: 300, color: theme.earth, marginBottom: 28, lineHeight: 1.2 }}>
                   Start a <em style={{ fontStyle: "italic" }}>conversation</em>
                 </h3>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                <div className="contact-form-grid">
                   <div>
-                    <label style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Full Name *</label>
+                    <label style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Full Name *</label>
                     <input placeholder="Your name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
                   </div>
                   <div>
-                    <label style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Email *</label>
+                    <label style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Email *</label>
                     <input type="email" placeholder="your@email.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
                   </div>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+                <div className="contact-form-grid">
                   <div>
-                    <label style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Phone</label>
+                    <label style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Phone</label>
                     <input placeholder="+91 00000 00000" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
                   </div>
                   <div>
-                    <label style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Subject</label>
+                    <label style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Subject</label>
                     <input placeholder="How can we help?" value={form.subject} onChange={e => setForm({...form, subject: e.target.value})} />
                   </div>
                 </div>
-                <div style={{ marginBottom: 32 }}>
-                  <label style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Message *</label>
+                <div style={{ marginBottom: 28 }}>
+                  <label style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.earthLight, display: "block", marginBottom: 8 }}>Message *</label>
                   <textarea placeholder="Tell us about your interest in partnering, donating, or volunteering..." rows={5} value={form.message} onChange={e => setForm({...form, message: e.target.value})} style={{ resize: "vertical" }} />
                 </div>
-                <button className="btn-primary" style={{ width: "100%", justifyContent: "center" }} onClick={handleSubmit}>
+                <button className="btn-primary" style={{ width: "100%", justifyContent: "center", minHeight: 52 }} onClick={handleSubmit}>
                   <span>Send Message</span><span><Icon.Arrow /></span>
                 </button>
-                <p style={{ fontSize: 12, color: theme.earthLight, textAlign: "center", marginTop: 16, lineHeight: 1.6 }}>
+                <p style={{ fontSize: 12, color: theme.earthLight, textAlign: "center", marginTop: 14, lineHeight: 1.6 }}>
                   For CSR partnerships, please also mention your company name and CSR budget.
                 </p>
               </>
@@ -1231,15 +1291,15 @@ function ContactPage() {
       </section>
 
       {/* Partnership types */}
-      <section style={{ background: theme.offWhite, padding: "80px 40px" }}>
+      <section style={{ background: theme.offWhite, padding: "clamp(48px, 8vw, 80px) clamp(20px, 5vw, 40px)" }}>
         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: 50 }}>
+          <div style={{ textAlign: "center", marginBottom: 44 }}>
             <div className="section-label" style={{ justifyContent: "center", marginBottom: 16 }}>Ways to contribute</div>
-            <h2 className="serif" style={{ fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, color: theme.earth, lineHeight: 1.2 }}>
+            <h2 className="serif" style={{ fontSize: "clamp(26px, 4vw, 44px)", fontWeight: 300, color: theme.earth, lineHeight: 1.2 }}>
               Join our <em style={{ fontStyle: "italic" }}>circle of impact</em>
             </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 2 }}>
+          <div className="partner-grid">
             {[
               { title: "CSR Partner", body: "Corporates can channel their CSR funds through our verified and compliant platform. We're CSR-1 registered under MCA.", accent: theme.saffron },
               { title: "Individual Donor", body: "Donations qualify for 80G tax deductions. Help a child learn, a woman grow, a community heal.", accent: theme.sage },
@@ -1247,15 +1307,14 @@ function ContactPage() {
               { title: "Institutional Partner", body: "NGOs, hospitals, universities, and government bodies can collaborate under our established compliance framework.", accent: theme.terracotta },
             ].map((way, i) => (
               <div key={i} style={{
-                padding: "40px 32px", background: "white",
+                padding: "36px 28px", background: "white",
                 borderTop: `4px solid ${way.accent}`,
                 transition: "transform 0.3s, box-shadow 0.3s",
-                cursor: "default",
               }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(61,43,31,0.1)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
               >
-                <h3 className="display" style={{ fontSize: 16, fontWeight: 600, color: theme.earth, marginBottom: 14, letterSpacing: "0.04em" }}>{way.title}</h3>
+                <h3 className="display" style={{ fontSize: 15, fontWeight: 600, color: theme.earth, marginBottom: 12, letterSpacing: "0.04em" }}>{way.title}</h3>
                 <p style={{ fontSize: 14, color: theme.earthLight, lineHeight: 1.7 }}>{way.body}</p>
               </div>
             ))}
@@ -1269,28 +1328,28 @@ function ContactPage() {
 // ─── FOOTER ───────────────────────────────────────────────
 function Footer({ setPage }) {
   return (
-    <footer style={{ background: "#1A0F08", padding: "80px 40px 40px", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", left: -80, bottom: -80, opacity: 0.04 }}>
+    <footer style={{ background: "#1A0F08", padding: "clamp(48px, 8vw, 80px) clamp(20px, 5vw, 40px) clamp(28px, 4vw, 40px)", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", left: -80, bottom: -80, opacity: 0.04, pointerEvents: "none" }}>
         <MandalaSVG size={400} opacity={1} />
       </div>
       <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 60, marginBottom: 60 }}>
+        <div className="grid-footer" style={{ marginBottom: 48 }}>
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 24 }}>
-              <div style={{ width: 44, height: 44, borderRadius: "50%", background: theme.saffron, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ fontFamily: "'Cinzel'", fontSize: 15, fontWeight: 700, color: "white" }}>MBP</span>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+              <div style={{ width: 40, height: 40, borderRadius: "50%", background: theme.saffron, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <span style={{ fontFamily: "'Cinzel'", fontSize: 13, fontWeight: 700, color: "white" }}>MBP</span>
               </div>
               <div>
-                <div style={{ fontFamily: "'Cinzel'", fontSize: 14, color: "white", letterSpacing: "0.04em" }}>MB Patil Foundation</div>
-                <div style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: theme.saffron }}>Health · Rural Dev · Education</div>
+                <div style={{ fontFamily: "'Cinzel'", fontSize: 13, color: "white", letterSpacing: "0.04em" }}>MB Patil Foundation</div>
+                <div style={{ fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: theme.saffron }}>Health · Rural Dev · Education</div>
               </div>
             </div>
-            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.8, maxWidth: 280, marginBottom: 24 }}>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.8, maxWidth: 280, marginBottom: 20 }}>
               A Section 8 non-profit company dedicated to health, rural development, and education across Maharashtra.
             </p>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 12, color: "rgba(255,255,255,0.4)" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 10, color: "rgba(255,255,255,0.4)" }}>
               <Icon.Location />
-              <span style={{ fontSize: 13, lineHeight: 1.6 }}>A.P. Hallali Devi, Nilanga,<br/>Latur – 413521, Maharashtra</span>
+              <span style={{ fontSize: 12, lineHeight: 1.6 }}>A.P. Hallali Devi, Nilanga,<br/>Latur – 413521, Maharashtra</span>
             </div>
           </div>
           {[
@@ -1299,10 +1358,10 @@ function Footer({ setPage }) {
             { title: "Programs", links: ["Children's Education", "Health & Wellness", "Project Deepak", "Women's Empowerment"] },
           ].map((col, i) => (
             <div key={i}>
-              <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.saffron, marginBottom: 20 }}>{col.title}</div>
+              <div style={{ fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.saffron, marginBottom: 16 }}>{col.title}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {col.links.map((link, j) => (
-                  <span key={j} style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", cursor: "pointer", transition: "color 0.2s" }}
+                  <span key={j} style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", cursor: "pointer", transition: "color 0.2s", lineHeight: 1.5, wordBreak: "break-word" }}
                     onMouseEnter={e => e.target.style.color = "white"}
                     onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.45)"}
                     onClick={() => { if(["Home","About","Programs","Impact","Contact"].includes(link)) setPage(link); }}
@@ -1312,8 +1371,8 @@ function Footer({ setPage }) {
             </div>
           ))}
         </div>
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>© 2025 MB Patil Foundation. CIN: U85500MH2025NPL453631. All rights reserved.</span>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 14 }}>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", lineHeight: 1.5 }}>© 2025 MB Patil Foundation. CIN: U85500MH2025NPL453631.</span>
           <div style={{ display: "flex" }}><LotusSVG color="rgba(200,81,10,0.4)" /></div>
         </div>
       </div>
