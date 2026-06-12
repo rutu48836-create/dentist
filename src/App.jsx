@@ -348,6 +348,17 @@ const Icon = {
       <path d="M2 8L6 12L14 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
+  Cow: () => (
+    <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
+      <path d="M5 6C5 6 3.5 4 4 2.5C4.5 1 6 2 6.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M19 6C19 6 20.5 4 20 2.5C19.5 1 18 2 17.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M5 8C5 5.5 7.5 4 12 4C16.5 4 19 5.5 19 8C19 9.5 18.3 10.3 17 10.8V13C17 15 15.5 16.5 13.5 16.5H10.5C8.5 16.5 7 15 7 13V10.8C5.7 10.3 5 9.5 5 8Z" stroke="currentColor" strokeWidth="1.4" fill="none"/>
+      <circle cx="9.5" cy="7.5" r="0.8" fill="currentColor"/>
+      <circle cx="14.5" cy="7.5" r="0.8" fill="currentColor"/>
+      <path d="M10 9.5C10.5 10 13.5 10 14 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" fill="none"/>
+      <path d="M9 16.5L8 19M15 16.5L16 19M11 16.5L10.5 19M13 16.5L13.5 19" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  ),
 };
 
 const MandalaSVG = ({ size = 300, opacity = 0.06 }) => (
@@ -980,6 +991,15 @@ function ProgramsPage() {
       reach: "Girls & women",
       budget: "₹8 Cr Scholarships",
       color: theme.terracotta,
+    },
+    {
+      icon: <Icon.Cow />,
+      tag: "Animal Welfare",
+      title: "Gausala — Stray Cow Shelters",
+      desc: "Building and maintaining Gausalas (cow shelters) across Latur district to rescue, feed, and care for stray and abandoned cows. Each shelter provides clean fodder, water, veterinary care, and a safe sanctuary — reflecting our commitment to compassion for all living beings.",
+      reach: "Stray cattle, Latur",
+      budget: "Community-funded",
+      color: theme.earthLight,
     },
   ];
 
