@@ -608,7 +608,7 @@ function HomePage({ setPage }) {
           <div className="stats-bar">
             {[
               { val: "2500+", label: "Beneficiaries" },
-              { val: "₹50 Cr", label: "Project Budget" },
+              { val: "₹500 Cr", label: "Project Budget" },
               { val: "5 Yrs", label: "Vision Span" },
             ].map((s, i) => (
               <div key={i} style={{ padding: "24px 28px", borderLeft: i ? "1px solid rgba(255,255,255,0.1)" : "none" }}>
@@ -962,7 +962,7 @@ function ProgramsPage() {
       title: "Children & Elder Education Programme",
       desc: "Through kathak, vocal music, theatre, arts, crafts and pottery — our education program explores the uniqueness within each child from marginalized backgrounds. Professionals trained in performing arts guide children at our centers.",
       reach: "2,500+ children",
-      budget: "₹20 Cr Infrastructure",
+      budget: "₹200 Cr Infrastructure",
       color: theme.saffron,
     },
     {
@@ -980,7 +980,7 @@ function ProgramsPage() {
       title: "Project Deepak",
       desc: "An innovative framework bringing together educational institutes, corporations, and global consultancies to create high-quality, industry-oriented skilling solutions for students at near-free costs. 100% digital for pan-India reach.",
       reach: "1,000+ trained",
-      budget: "₹5 Cr Training",
+      budget: "₹50 Cr Training",
       color: theme.gold,
     },
     {
@@ -989,7 +989,7 @@ function ProgramsPage() {
       title: "Women's Empowerment Initiative",
       desc: "Targeted programs for girl education, first-generation learners, vocational training, maternal wellness, and economic independence for women in rural Maharashtra — led by our woman founder.",
       reach: "Girls & women",
-      budget: "₹8 Cr Scholarships",
+      budget: "₹80 Cr Scholarships",
       color: theme.terracotta,
     },
     {
@@ -998,7 +998,7 @@ function ProgramsPage() {
       title: "Gausala — Stray Cow Shelters",
       desc: "Building and maintaining Gausalas (cow shelters) across Latur district to rescue, feed, and care for stray and abandoned cows. Each shelter provides clean fodder, water, veterinary care, and a safe sanctuary — reflecting our commitment to compassion for all living beings.",
       reach: "Stray cattle, Latur",
-      budget: "Community-funded",
+      budget: "₹10 Cr Community",
       color: theme.earthLight,
     },
   ];
@@ -1069,18 +1069,19 @@ function ProgramsPage() {
           <div style={{ textAlign: "center", marginBottom: 48 }}>
             <div className="section-label" style={{ justifyContent: "center", marginBottom: 16 }}>Financial Transparency</div>
             <h2 className="serif" style={{ fontSize: "clamp(26px, 4vw, 48px)", fontWeight: 300, color: theme.earth }}>
-              ₹50 Crore. <em style={{ fontStyle: "italic" }}>Every rupee counts.</em>
+              ₹500 Crore. <em style={{ fontStyle: "italic" }}>Every rupee counts.</em>
             </h2>
           </div>
           <div className="budget-grid">
             {[
-              { label: "Infrastructure", pct: 40, amt: "₹20 Cr", color: theme.saffron },
-              { label: "Digital Learning", pct: 20, amt: "₹10 Cr", color: theme.gold },
-              { label: "Teacher Training", pct: 10, amt: "₹5 Cr", color: theme.sage },
-              { label: "Scholarships", pct: 16, amt: "₹8 Cr", color: theme.terracotta },
-              { label: "Community Work", pct: 4, amt: "₹2 Cr", color: theme.earthLight },
-              { label: "Monitoring", pct: 4, amt: "₹2 Cr", color: theme.earth },
-              { label: "Admin", pct: 6, amt: "₹3 Cr", color: "#8B7355" },
+              { label: "Infrastructure", pct: 39, amt: "₹200 Cr", color: theme.saffron },
+              { label: "Digital Learning", pct: 20, amt: "₹100 Cr", color: theme.gold },
+              { label: "Teacher Training", pct: 10, amt: "₹50 Cr", color: theme.sage },
+              { label: "Scholarships", pct: 16, amt: "₹80 Cr", color: theme.terracotta },
+              { label: "Community Work", pct: 4, amt: "₹20 Cr", color: theme.earthLight },
+              { label: "Monitoring", pct: 4, amt: "₹20 Cr", color: theme.earth },
+              { label: "Admin", pct: 6, amt: "₹30 Cr", color: "#8B7355" },
+              { label: "Gausala", pct: 2, amt: "₹10 Cr", color: theme.earthLight },
             ].map((item, i) => (
               <div key={i} style={{ padding: "28px 24px", background: "white", borderTop: `4px solid ${item.color}` }}>
                 <div style={{ fontSize: "clamp(28px, 6vw, 40px)", fontWeight: 700, fontFamily: "'Cinzel'", color: item.color, marginBottom: 6, lineHeight: 1 }}>{item.pct}%</div>
