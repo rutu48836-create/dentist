@@ -211,6 +211,7 @@ input::placeholder, textarea::placeholder { color: #B0A090; }
 .contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .cta-banner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px; }
 .cta-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+.bank-detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
 
 @media (max-width: 960px) {
   .grid-2col { grid-template-columns: 1fr; gap: 48px; }
@@ -246,10 +247,12 @@ input::placeholder, textarea::placeholder { color: #B0A090; }
   .partner-grid { grid-template-columns: 1fr; }
   .budget-grid { grid-template-columns: repeat(2, 1fr); }
   .impact-grid { grid-template-columns: 1fr; gap: 12px; }
+  .bank-detail-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 480px) {
   .budget-grid { grid-template-columns: 1fr 1fr; }
+  .bank-detail-grid { grid-template-columns: 1fr; }
 }
 `;
 
@@ -322,6 +325,27 @@ const Icon = {
   Quote: () => (
     <svg width="36" height="28" viewBox="0 0 36 28" fill="none">
       <path d="M0 28V18C0 13.6 1.4 9.8 4.2 6.6C7.2 3.2 11 1 15.6 0L16.4 2.4C13.8 3.2 11.6 4.8 9.8 7.2C8.2 9.4 7.4 11.8 7.4 14.4H14V28H0ZM20 28V18C20 13.6 21.4 9.8 24.2 6.6C27.2 3.2 31 1 35.6 0L36 2.4C33.4 3.2 31.2 4.8 29.4 7.2C27.8 9.4 27 11.8 27 14.4H34V28H20Z" fill="currentColor"/>
+    </svg>
+  ),
+  Bank: () => (
+    <svg width="22" height="20" viewBox="0 0 22 20" fill="none">
+      <path d="M11 1L1 6.5H21L11 1Z" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinejoin="round"/>
+      <line x1="3" y1="9" x2="3" y2="17" stroke="currentColor" strokeWidth="1.4"/>
+      <line x1="8" y1="9" x2="8" y2="17" stroke="currentColor" strokeWidth="1.4"/>
+      <line x1="14" y1="9" x2="14" y2="17" stroke="currentColor" strokeWidth="1.4"/>
+      <line x1="19" y1="9" x2="19" y2="17" stroke="currentColor" strokeWidth="1.4"/>
+      <line x1="1" y1="19" x2="21" y2="19" stroke="currentColor" strokeWidth="1.4"/>
+    </svg>
+  ),
+  Copy: () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <rect x="5" y="5" width="10" height="10" rx="1" stroke="currentColor" strokeWidth="1.3"/>
+      <path d="M11 5V2H2V11H5" stroke="currentColor" strokeWidth="1.3"/>
+    </svg>
+  ),
+  Check: () => (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M2 8L6 12L14 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
 };
@@ -1146,6 +1170,91 @@ function ImpactPage() {
   );
 }
 
+// ─── DONATE / BANK DETAILS CARD ───────────────────────────
+function BankDetailsCard() {
+  const [copied, setCopied] = useState("");
+
+  const details = [
+    { label: "Account Name", value: "M B Patil Foundation" },
+    { label: "Account Number", value: "403020111111" },
+    { label: "IFSC Code", value: "RATN0000279" },
+    { label: "Bank", value: "RBL Bank Ltd, Magarpatta, Pune" },
+  ];
+
+  const handleCopy = (value, label) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(value).catch(() => {});
+    }
+    setCopied(label);
+    setTimeout(() => setCopied(""), 1600);
+  };
+
+  return (
+    <div style={{
+      background: `linear-gradient(150deg, ${theme.earth} 0%, #2A1A0F 100%)`,
+      padding: "clamp(32px, 5vw, 48px) clamp(24px, 5vw, 48px)",
+      position: "relative", overflow: "hidden",
+      marginBottom: 48,
+    }}>
+      <div style={{ position: "absolute", right: -60, top: -60, opacity: 0.06, pointerEvents: "none" }}>
+        <MandalaSVG size={320} opacity={1} />
+      </div>
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28, flexWrap: "wrap" }}>
+          <div style={{
+            width: 52, height: 52, background: "rgba(255,255,255,0.06)",
+            border: `1px solid rgba(245,215,142,0.3)`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: theme.goldLight, flexShrink: 0,
+          }}>
+            <Icon.Bank />
+          </div>
+          <div>
+            <div style={{ fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: theme.goldLight, marginBottom: 6 }}>Direct Bank Transfer</div>
+            <h3 className="serif" style={{ fontSize: "clamp(20px, 3vw, 28px)", fontWeight: 300, color: "white", lineHeight: 1.2 }}>
+              Donate <em style={{ fontStyle: "italic", color: theme.goldLight }}>directly</em> to our account
+            </h3>
+          </div>
+        </div>
+
+        <div className="bank-detail-grid">
+          {details.map((item, i) => (
+            <div key={i} style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              padding: "18px 20px",
+              position: "relative",
+              transition: "border-color 0.3s, background 0.3s",
+              cursor: "pointer",
+            }}
+              onClick={() => handleCopy(item.value, item.label)}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = `${theme.saffron}80`; e.currentTarget.style.background = "rgba(200,81,10,0.1)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; }}
+            >
+              <div style={{ fontSize: 9, letterSpacing: "0.2em", textTransform: "uppercase", color: theme.goldLight, marginBottom: 8 }}>{item.label}</div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 }}>
+                <span className="display" style={{ fontSize: item.label === "Bank" ? 13 : 16, fontWeight: 600, color: "white", letterSpacing: item.label === "Account Number" || item.label === "IFSC Code" ? "0.08em" : "normal", wordBreak: "break-word", lineHeight: 1.4 }}>
+                  {item.value}
+                </span>
+                <span style={{ color: copied === item.label ? "#7FBF7F" : "rgba(255,255,255,0.35)", flexShrink: 0, transition: "color 0.2s" }}>
+                  {copied === item.label ? <Icon.Check /> : <Icon.Copy />}
+                </span>
+              </div>
+              {copied === item.label && (
+                <div style={{ position: "absolute", top: 8, right: 8, fontSize: 10, color: "#7FBF7F", letterSpacing: "0.15em", textTransform: "uppercase" }}>Copied</div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", marginTop: 24, lineHeight: 1.7 }}>
+          Tap any field to copy it. Please email your transaction reference and address to <span style={{ color: theme.goldLight }}>balajipatil1080@gmail.com</span> so we can issue your 80G donation receipt.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ─── CONTACT PAGE ─────────────────────────────────────────
 function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
@@ -1179,7 +1288,11 @@ function ContactPage() {
         </svg>
       </div>
 
-      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px)", maxWidth: 1280, margin: "0 auto" }}>
+      <section style={{ padding: "clamp(60px, 10vw, 100px) clamp(20px, 5vw, 40px) 0", maxWidth: 1280, margin: "0 auto" }}>
+        <BankDetailsCard />
+      </section>
+
+      <section style={{ padding: "0 clamp(20px, 5vw, 40px) clamp(60px, 10vw, 100px)", maxWidth: 1280, margin: "0 auto" }}>
         <div className="grid-contact">
           {/* Info side */}
           <div>
